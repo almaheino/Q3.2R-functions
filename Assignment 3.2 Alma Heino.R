@@ -1,0 +1,80 @@
+#Assignment 3.2 Alma Heino 13211382
+
+#Q3.2R.1
+
+remind_me<- function() {
+  MyWeek <- list("Monday" = "School", "Work", "Gym", 
+                 "Tuesday" = "Work", "Bos",
+                 "Wednesday" = "School", "Work", "Dance", 
+                 "Thursday" = "Work", "Cycle",
+                 "Friday" = "School", "Work",
+                 "Saturday" = "Dance",
+                 "Sunday" = "Rest"
+                 )
+  return(MyWeek)
+}
+remind_me()
+
+
+cheat <- function(question) {
+  question3_1_7 <- "ggplot(data=cars, aes(x = speed, y=dist)) +
+             geom_point() +
+             geom_smooth(method= 'loess', formula= 'y ~ x')"
+  question3_1_11 <- "install.packages('gganimate')
+  library(gganimate)
+  install.packages('cranlogs')
+  library(cranlogs)
+
+
+  downloads_data <- cran_downloads(packages = c('ggplot2', 'plotly'), from = '2014-01-01', to= '2024-01-01')
+
+  p <- ggplot(downloads_data,
+              aes(x = date, y=count, color= factor(package))) +
+    geom_line() +
+    labs(y='Package downloads', x= 'package'') +
+    ggtitle('Package downloads over time'') +
+    theme_bw() +
+    theme(plot.title = element_text(hjust = 0.5))
+
+  p + transition_reveal(date)"
+  question3_1_17 <- "# Ctrl + Shift + A"
+  if (question == "3.1.7") {
+    return(question3_1_7)
+  } else if (question == "3.1.11") {
+    return(question3_1_11)
+  } else if (question == "3.1.17") {
+    return(question3_1_17)
+  }
+}
+cheat("3.1.7")
+
+#Q3.2R.1 ----------------------------------------------------------------------
+
+makeart <- function(seed= 123, n= 50, palette=4 ) {
+  if(palette<1 & palette > 35) {
+    stop("Palette number must be an integer between 1 and 35")
+  } 
+  set.seed(seed)
+  df <- as.data.frame(matrix(round(runif(n=n, min=1, max=500), 0), nrow=n/2))
+  
+  palettes<- c("BrBG", "PiYG", "PRGn", "PuOr", "RdBu", "RdGy", "RdYlBu", "RdYlGn",
+               "Spectral", "Accent", "Dark2", "Paired", "Pastel1", "Pastel2", "Set1", 
+               "Set2", "Set3", "Blues", "BuGn", "BuPu", "GnBu", "Greens", "Greys",
+               "Oranges", "OrRd", "PuBu", "PuBuGn", "PuRd", "Purples", 
+               "RdPu", "Reds", "YlGn", "YlGnBu", "YlOrBr", "YlOrRd"
+               )
+
+  chosenpalette<- palettes[palette]
+  ggplot(df, aes(x=V1, y=V2) ) +
+    stat_density_2d(aes(fill = ..density..), geom = "raster", contour = FALSE, show.legend = FALSE) +
+    scale_fill_distiller(palette= chosenpalette, direction=-1) +
+    scale_x_continuous(expand = c(0, 0)) +
+    scale_y_continuous(expand = c(0, 0)) +
+    theme_void() 
+  
+}
+
+palettes[31]
+makeart(seed = 10, n=50, palette=17)
+makeart(10,50,9)
+
